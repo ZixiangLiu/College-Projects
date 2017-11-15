@@ -1,0 +1,33 @@
+0x00400580  [  14, 0] NS uri: "/home/hoover/u3/jkottas/ur/254-a4-example/foo.c"
+0x00400580  [  16, 0] NS
+0x00400580  [  17, 0] NS
+0x00400590  [   3, 0] NS
+0x00400594  [  10, 0] NS
+0x004005a5  [  12, 0] NS
+0x004005b0  [  19, 0] NS
+0x004005b4  [  21, 0] NS
+0x004005c5  [  22, 0] NS
+0x004005d0  [  26, 0] NS
+0x004005d4  [  27, 0] NS
+0x004005d9  [  26, 0] NS
+0x004005dd  [  27, 0] NS
+0x004005e8  [  26, 0] NS
+0x004005ec  [  27, 0] NS
+0x004005f1  [  26, 0] NS
+0x004005f8  [  27, 0] NS
+0x00400603  [  29, 0] NS
+0x0040060c  [  31, 0] NS
+0x0040061c  [  32, 0] NS
+0x00400621  [  32, 0] NS ET
+0x00400470  [  34, 0] NS
+0x00400474  [  36, 0] NS
+0x0040047b  [  37, 0] NS
+0x00400482  [   6, 0] NS uri: "/home/hoover/u3/jkottas/ur/254-a4-example/blah.h"
+0x00400493  [  41, 0] NS uri: "/home/hoover/u3/jkottas/ur/254-a4-example/foo.c"
+0x0040049a  [  41, 0] NS ET
+0x00400630  [   3, 0] NS uri: "/home/hoover/u3/jkottas/ur/254-a4-example/bar.c"
+0x00400630  [   4, 0] NS
+0x00400630  [   5, 0] NS
+0x00400640  [   7, 0] NS
+0x00400640  [   9, 0] NS
+0x00400644  [   9, 0] NS ET

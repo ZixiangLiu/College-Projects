@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assembly Code Comparer</title>
+    <style type="text/css">
+
+        * { 
+            line-height: 1.5em;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td
+        {
+            padding: 5px;
+            border: 1px solid black;
+            vertical-align: bottom;
+            width: 50%;
+        }
+
+        th
+        {
+            border: 1px solid black;
+        }
+
+        .grey {
+            color: grey
+        }
+
+    </style>
+</head>
+<body>
+    <table>
+
+    

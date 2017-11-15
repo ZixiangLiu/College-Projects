@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assembly Code Comparer</title>
+    <style type="text/css">
+
+        * { 
+            font-family: monospace; 
+            line-height: 1.5em;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td
+        {
+            padding: 8px;
+            border-bottom: 2px solid black;
+            vertical-align: bottom;
+            width: 50%;
+        }
+
+        th
+        {
+            border: 1px solid black;
+        }
+
+        .grey {
+            color: #888
+        }
+
+    </style>
+</head>
+<body>
+    <table>
+
+    		<tr>
+			<td>
+				<br>
+				int main() {<br>
+			</td>
+			<td>
+				sub $0x18,%rsp<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				    // which bar?<br>
+				    bar();<br>
+			</td>
+			<td>
+				xor %eax,%eax<br>
+				callq 400580<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				    complicated_func();<br>
+			</td>
+			<td>
+				xor %eax,%eax<br>
+				callq 4005b0<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br>
+				#include <stdio.h><br>
+				#define NO_INLINE __attribute__((noinline))<br>
+				<br>
+				inline int blah() {<br>
+				    int x;<br>
+				    scanf("%d", &x);<br>
+			</td>
+			<td>
+				lea 0xc(%rsp),%rsi<br>
+				mov $0x4006e4,%edi<br>
+				xor %eax,%eax<br>
+				callq 400460<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				    // Notice that the source before this comes from a different file<br>
+				    blah();<br>
+				    return 0;<br>
+				}<br>
+			</td>
+			<td>
+				xor %eax,%eax<br>
+				add $0x18,%rsp<br>
+				retq<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				    // Notice that the source before this comes from a different file<br>
+				    blah();<br>
+				    return 0;<br>
+				}<br>
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br>
+				static void NO_INLINE bar() {<br>
+			</td>
+			<td>
+				retq<br>
+				nopl 0x0(%rax,%rax,1)<br>
+				nopw %cs:0x0(%rax,%rax,1)<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br>
+				#include "blah.h"<br>
+				<br>
+				int foo() {<br>
+			</td>
+			<td>
+				sub $0x8,%rsp<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				    // Notice how there's a 4:7 ratio of asm to source lines here - this ratio<br>
+				    // can be aribtrary<br>
+				    int x = 0;<br>
+				    for (int i = 0; i < 100; ++i) {<br>
+				        x += i;<br>
+				    }<br>
+				    printf("%d\n", x);<br>
+			</td>
+			<td>
+				mov $0x1356,%esi<br>
+				mov $0x4006e0,%edi<br>
+				xor %eax,%eax<br>
+				callq 400450<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				    return x;<br>
+				}<br>
+			</td>
+			<td>
+				mov $0x1356,%eax<br>
+				add $0x8,%rsp<br>
+				retq<br>
+				nop<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br>
+				void NO_INLINE complicated_func() {<br>
+			</td>
+			<td>
+				sub $0x18,%rsp<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				    int x;<br>
+				    scanf("%d\n", &x);<br>
+			</td>
+			<td>
+				mov $0x4006e0,%edi<br>
+				xor %eax,%eax<br>
+				lea 0x8(%rsp),%rsi<br>
+				callq 400460<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				    volatile int y = x;<br>
+			</td>
+			<td>
+				mov 0x8(%rsp),%eax<br>
+				mov %eax,0xc(%rsp)<br>
+				nopl (%rax)<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br>
+				    do {<br>
+				        for (int i = 0; i < 2; ++i) {<br>
+				            y += i;<br>
+			</td>
+			<td>
+				mov 0xc(%rsp),%eax<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				            printf("%d\n", y);<br>
+			</td>
+			<td>
+				mov $0x4006e0,%edi<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br>
+				    do {<br>
+				        for (int i = 0; i < 2; ++i) {<br>
+				            y += i;<br>
+			</td>
+			<td>
+				mov %eax,0xc(%rsp)<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				            printf("%d\n", y);<br>
+			</td>
+			<td>
+				mov 0xc(%rsp),%esi<br>
+				xor %eax,%eax<br>
+				callq 400450<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br>
+				    do {<br>
+				        for (int i = 0; i < 2; ++i) {<br>
+				            y += i;<br>
+			</td>
+			<td>
+				mov 0xc(%rsp),%eax<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				            printf("%d\n", y);<br>
+			</td>
+			<td>
+				mov $0x4006e0,%edi<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br>
+				    do {<br>
+				        for (int i = 0; i < 2; ++i) {<br>
+				            y += i;<br>
+			</td>
+			<td>
+				add $0x1,%eax<br>
+				mov %eax,0xc(%rsp)<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				            printf("%d\n", y);<br>
+			</td>
+			<td>
+				mov 0xc(%rsp),%esi<br>
+				xor %eax,%eax<br>
+				callq 400450<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				        }<br>
+				    } while (y == 7);<br>
+			</td>
+			<td>
+				mov 0xc(%rsp),%eax<br>
+				cmp $0x7,%eax<br>
+				je 4005d0<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br>
+				    printf("%d\n", y);<br>
+			</td>
+			<td>
+				mov 0xc(%rsp),%esi<br>
+				mov $0x4006e0,%edi<br>
+				xor %eax,%eax<br>
+				callq 400450<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				}<br>
+			</td>
+			<td>
+				add $0x18,%rsp<br>
+				retq<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				}<br>
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br>
+				#include "blah.h"<br>
+				<br>
+				static void NO_INLINE bar() {<br>
+			</td>
+			<td>
+				retq<br>
+				nopl 0x0(%rax,%rax,1)<br>
+				nopw %cs:0x0(%rax,%rax,1)<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br>
+				void func() {<br>
+			</td>
+			<td>
+				xor %eax,%eax<br>
+				jmp 400630<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				    // which bar?<br>
+				    bar();<br>
+			</td>
+			<td>
+			</td>
+		</tr>
+
+
+    </table>
+</body>
+</html>

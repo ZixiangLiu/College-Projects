@@ -1,5 +1,6 @@
 # Syntax error recovery on Calculator language
 Partner: Yukun Chen
+## Important Information!
 #### Calculator language created by Prof. Micheal Scott, University of Rochester
 #### Code structure also provided by Prof. Micheal Scott
 

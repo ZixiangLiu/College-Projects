@@ -5,3 +5,5 @@ Partner: Yukun Chen
 #### First 600 lines of Code are provided by Prof. Micheal Scott
 
 I also extended the calculator language with "%" and for loop.
+
+The main program is written in Ocaml.

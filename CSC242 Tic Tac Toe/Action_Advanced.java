@@ -1,3 +1,14 @@
+/* CSC242
+ * Project 1
+ * 02.10.2018
+ * Yukun Chen, Zixiang Liu, Yifei Yang
+ * Action_Advanced.java
+
+ * The Action_Advanced class
+ * an action contains a 2 elements int array
+ * first element is the board position
+ * second element is the position on the selected board
+ */
 public class Action_Advanced {
 	public int[] num = new int [2];
 
@@ -24,7 +35,7 @@ public class Action_Advanced {
 	*/
 	@Override
 	public String toString() {
-		return String.valueOf(num[0]) + " " + String.valueOf(num[1]);
+		return String.valueOf(num[0]+1) + " " + String.valueOf(num[1]+1);
 	}
 
 	/**

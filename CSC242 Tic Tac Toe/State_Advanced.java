@@ -1,4 +1,9 @@
-/*
+/* CSC242
+ * Project 1
+ * 02.10.2018
+ * Yukun Chen, Zixiang Liu, Yifei Yang
+ * Action_Advanced.java
+
  * The state class
  * a state contains a board configuration and a player status
  * board:
@@ -16,6 +21,8 @@ public class State_Advanced implements Serializable{
   public boolean player;
   public int[] legalBoard;
   public int level;
+  public int alpha;
+  public int beta;
 
   /**
   * Default empty State_Advanced constructor
@@ -32,52 +39,61 @@ public class State_Advanced implements Serializable{
     this.legalBoard = temp;
     this.level = 0;
     this.player = true; // cross plays first
+    this.alpha = -2000;
+    this.beta = 2000;
   }
 
+  /**
+  * Default State_Advanced to copy from other State_Advanced
+  */
   public State_Advanced(State_Advanced another) {
     super();
     this.board = another.getBoard();
     this.player = another.getPlayer();
     this.legalBoard = another.getLegalBoard();
     this.level = another.getLevel();
+    this.alpha = another.alpha;
+    this.beta = another.beta;
   }
 
 
   /**
   * Default State_Advanced constructor
   */
-  public State_Advanced(int[][] board, boolean player, int[] legalBoard, int level) {
+  public State_Advanced(int[][] board, boolean player, int[] legalBoard, int level, int alpha, int beta) {
     super();
     this.board = board;
     this.player = player;
     this.legalBoard = legalBoard;
     this.level = level;
+    this.alpha = alpha;
+    this.beta = beta;
   }
 
-
+  // function to mark the current step of state, and return the next state
   public State_Advanced mark(int[] move){
     State_Advanced s = (State_Advanced)deepClone(this);
     int [][] tempBoard = s.board;
-    if(s.player){
+    if(s.player){                       // mark the selected position to cross or nought
       tempBoard[move[0]][move[1]] = 1;
     }else{
       tempBoard[move[0]][move[1]] = -1;
     }
     int[] tempLegalBoard;
     boolean haveSpace = false;
-    for (int i = 0; i < 9; i++){
+    for (int i = 0; i < 9; i++){       // detect wether there is space left for the selected board
       if (tempBoard[move[1]][i] == -2)
         haveSpace = true;
     }
     if (haveSpace){
-      int [] temp = {move[1]};
+      int [] temp = {move[1]};      // if yes, next move shall be on that board
       tempLegalBoard = temp;
     }else{
-      int [] temp = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+      int [] temp = {0, 1, 2, 3, 4, 5, 6, 7, 8};    // if not, next move can be any board
       tempLegalBoard = temp;
     }
     int tempLevel = ++s.level;
-    return new State_Advanced(tempBoard, !s.player, tempLegalBoard, tempLevel);
+    return new State_Advanced(tempBoard, !s.player, tempLegalBoard, tempLevel, s.alpha, s.beta);
   }
 
   /**
@@ -329,7 +345,8 @@ public class State_Advanced implements Serializable{
   public void setLevel(int level) {
     this.level = level;
   }
-
+  
+  // function to deep clone an object 
   public static Object deepClone(Object object) {
     try {
      ByteArrayOutputStream baos = new ByteArrayOutputStream();
